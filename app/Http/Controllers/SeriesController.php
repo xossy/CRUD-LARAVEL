@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\{Season, Series, Episode};
 use App\Http\Requests\SeriesFormRequest;
-use App\Models\Series;
-use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
@@ -24,18 +23,29 @@ class SeriesController extends Controller
     public function store(SeriesFormRequest $request)
     {
         $serie = Series::create($request->all());
+        
+        $seasons = [];
+        $episodes = [];
 
         for ($i = 1; $i <= $request->seasonsQty; $i++) {
-            $season = $serie->season()->create([
+            $seasons[] = [
+                'series_id' => $serie->id,
                 'number' => $i,
-            ]);
+            ];
+        }
+        Season::insert($seasons);
 
-            for ($j = 1; $i <= $request->episodesPerSeason; $j++) {
-                $season->episodes()->create([
-                    "number" => $j,
-                ]);
+        foreach ($serie->season() as $season) {
+            dd($season);
+            for ($j = 1; $j <= $request->episodesPerSeason; $j++) {
+                $episodes[] = [
+                    'season_id' => $season->id,
+                    'number' => $j,
+                ];
             }
         }
+
+        Episode::insert($episodes);
 
         return to_route('series.index')->with('mensagem.sucesso', "Serie '{$serie->nome}' Criada Com Sucesso");
     }
