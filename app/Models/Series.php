@@ -14,12 +14,12 @@ class Series extends Model
 
     public function season()
     {
-        return $this->hasMany(Season::class);
+        return $this->hasMany(Season::class, 'series_id');
     }
 
      protected static function booted(){
         self::addGlobalScope('ordered', function(Builder $queryBuilder){
-            $queryBuilder->orderBy('nome', 'ASC');
+            $queryBuilder->orderBy('created_at', 'DESC');
         });
     }
 }
