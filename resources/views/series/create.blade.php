@@ -14,7 +14,10 @@
                 <label for="nome" class="form-label">Nome:</label>
                 <input type="text" autofocus class="form-control" name="nome" id="nome" value="{{ old('nome') }}">
             </div>
-
+            <div class="col-8">
+                <label for="nome" class="form-label">Subtitulo:</label>
+                <textarea type="text" class="form-control" name="subtitulo" id="subtitulo" value="{{ old('subtitulo') }}"></textarea>
+            </div>
             <div class="col-2">
                 <label for="seasonsQty" class="form-label">N° Temporadas:</label>
                 <input type="Number" class="form-control" name="seasonsQty" id="seasonsQty" value="{{ old('seasonsQty') }}">

@@ -9,7 +9,7 @@
     <ul class="list-group">
         @foreach ($series as $ind => $serie)
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ $serie->id }} - {{ $serie->nome }} - {{ $serie->created_at }}
+                <a href="{{ route('seasons.index', $serie->id)}}"> {{ $serie->id }} - {{ $serie->nome }} - {{ $serie->created_at }} </a>
                 <span class="d-flex">
                     <a href="{{ route('series.edit', $serie->id) }}" class="btn btn-primary btn-sm">
                         Editar
@@ -23,6 +23,9 @@
                     </form>
                 </span>
             </li>
+            <div>
+                <span>{{$serie->subtitulo}}</span>
+            </div>
         @endforeach
     </ul>
 </x-layout>

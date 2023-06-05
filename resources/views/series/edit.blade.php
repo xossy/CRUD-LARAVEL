@@ -12,6 +12,10 @@
             <input type="text" class="form-control" name="nome" id="nome"
                 value="{{ $serie->nome }}">
         </div>
+        <div class="mb-3">
+            <label for="nome" class="form-label">Subtitulo:</label>
+            <textarea type="text" class="form-control" name="subtitulo" id="subtitulo">{{ $serie->subtitulo }}</textarea>
+        </div>
         <button type="submit" class="btn btn-primary">Modificar</button>
     </form>
 </x-layout>
